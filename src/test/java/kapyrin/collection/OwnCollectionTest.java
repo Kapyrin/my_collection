@@ -37,8 +37,6 @@ class OwnCollectionTest {
 
         assertTrue(collection.contains(45));
         assertFalse(collection.contains(60));
-
-
     }
 
     @Test
@@ -138,6 +136,7 @@ class OwnCollectionTest {
         assertNotEquals(3, collection.get(2));
         assertNotEquals(-4, collection.get(3));
     }
+
     @Test
     void testConstructorWithAnotherCollectionToParameter() {
         List<Integer> list = new ArrayList<>();

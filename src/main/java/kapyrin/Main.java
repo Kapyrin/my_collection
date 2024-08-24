@@ -14,6 +14,6 @@ public class Main {
         collection.add("C");
         System.out.println(collection);
 
-        //JUnit test there are in test folder;
+        //JUnit tests there are in test folder;
     }
 }

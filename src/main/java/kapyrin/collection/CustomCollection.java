@@ -24,10 +24,10 @@ public interface CustomCollection<T> {
 
     static <T extends Comparable<? super T>> void bubbleSort(CustomCollection<T> collection) {
         boolean swapped;
-        int n = collection.size();
+        int size = collection.size();
         do {
             swapped = false;
-            for (int i = 0; i < n - 1; i++) {
+            for (int i = 0; i < size - 1; i++) {
                 if (collection.get(i).compareTo(collection.get(i + 1)) > 0) {
                     T temp = collection.get(i);
                     collection.set(i, collection.get(i + 1));
@@ -35,7 +35,7 @@ public interface CustomCollection<T> {
                     swapped = true;
                 }
             }
-            n--;
+            size--;
         } while (swapped);
     }
 

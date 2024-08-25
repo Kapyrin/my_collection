@@ -1,14 +1,11 @@
 package kapyrin;
 
-import kapyrin.collection.OwnCollection;
-
-import java.util.ArrayList;
-import java.util.List;
+import kapyrin.collection.OwnArrayListCollection;
 
 
 public class Main {
     public static void main(String[] args) {
-        OwnCollection<String> collection = new OwnCollection<>();
+        OwnArrayListCollection<String> collection = new OwnArrayListCollection<>();
         collection.add("A");
         collection.add("B");
         collection.add("C");

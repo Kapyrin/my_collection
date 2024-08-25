@@ -4,23 +4,22 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.stream.IntStream;
 
-public class OwnCollection<T> implements CustomCollection<T> {
+public class OwnArrayListCollection<T> implements CustomCollection<T> {
     private T[] partsOfCollection;
     private int size;
     private static final int INITIAL_CAPACITY = 16;
 
-    public OwnCollection() {
+    public OwnArrayListCollection() {
         this.partsOfCollection = (T[]) new Object[INITIAL_CAPACITY];
         size = 0;
     }
 
-    public OwnCollection(int size) {
-        this.partsOfCollection = (T[]) new Object[size];
+    public OwnArrayListCollection(int initialCapacity) {
+        this.partsOfCollection = (T[]) new Object[initialCapacity];
         this.size = 0;
     }
 
-
-    public OwnCollection(Collection<? extends T> collection) {
+    public OwnArrayListCollection(Collection<? extends T> collection) {
         this.partsOfCollection = (T[]) new Object[collection.size()];
         this.size = 0;
         addAll(collection);
@@ -35,7 +34,7 @@ public class OwnCollection<T> implements CustomCollection<T> {
     @Override
     public boolean contains(T element) {
         return IntStream.range(0, size)
-                .anyMatch(e -> element.equals(partsOfCollection[e]));
+                .anyMatch(i -> element.equals(partsOfCollection[i]));
     }
 
     @Override
@@ -57,16 +56,18 @@ public class OwnCollection<T> implements CustomCollection<T> {
 
     @Override
     public boolean removeByIndex(int index) {
-        if (checkValidIndex(index)) {
-            int movedIndex = size - index - 1;
+        checkValidIndex(index);
 
+        if (index == size - 1) {
+            partsOfCollection[--size] = null;
+        } else {
+            int movedIndex = size - index - 1;
             if (movedIndex > 0) {
                 System.arraycopy(partsOfCollection, index + 1, partsOfCollection, index, movedIndex);
             }
             partsOfCollection[--size] = null;
-            return true;
         }
-        return false;
+        return true;
     }
 
     @Override
@@ -80,7 +81,6 @@ public class OwnCollection<T> implements CustomCollection<T> {
         }
 
         return true;
-
     }
 
     @Override
@@ -91,16 +91,10 @@ public class OwnCollection<T> implements CustomCollection<T> {
     }
 
     private int[] returnIndex(T element) {
-        int[] indexes = IntStream.range(0, size)
+        return IntStream.range(0, size)
                 .filter(index -> partsOfCollection[index].equals(element))
                 .toArray();
-
-        if (indexes.length == 0) {
-            throw new IndexOutOfBoundsException("No such element");
-        }
-        return indexes;
     }
-
 
     private void increaseCapacity() {
         if (size >= partsOfCollection.length * 0.8) {
@@ -109,9 +103,8 @@ public class OwnCollection<T> implements CustomCollection<T> {
         }
     }
 
+    @Override
     public void addAll(Collection<? extends T> elements) {
-        increaseCapacity();
-
         for (T element : elements) {
             add(element);
         }
@@ -120,15 +113,13 @@ public class OwnCollection<T> implements CustomCollection<T> {
     @Override
     public void set(int index, T element) {
         checkValidIndex(index);
-
         partsOfCollection[index] = element;
     }
 
-    private boolean checkValidIndex(int index) {
+    private void checkValidIndex(int index) {
         if (index < 0 || index >= size) {
-            return false;
+            throw new IndexOutOfBoundsException("Invalid index: " + index);
         }
-        return true;
     }
 
     @Override

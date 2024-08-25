@@ -8,12 +8,12 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class OwnCollectionTest {
-    private OwnCollection collection;
+class OwnLinkedListCollectionTest {
+    private OwnLinkedListCollection collection;
 
     @BeforeEach
     public void setUp() {
-        collection = new OwnCollection<Integer>();
+        collection = new OwnLinkedListCollection<Integer>();
     }
 
     @Test
@@ -119,6 +119,7 @@ class OwnCollectionTest {
         assertTrue(collection.contains(15));
         assertTrue(collection.contains(20));
     }
+
     @Test
     void testSet() {
         collection.add(10);
@@ -130,6 +131,10 @@ class OwnCollectionTest {
         assertEquals(15, collection.get(0));
         assertEquals(20, collection.get(1));
         assertEquals(30, collection.get(2));
+
+        assertThrows(IndexOutOfBoundsException.class, () -> {
+            collection.set(4, 15);
+        });
     }
 
 
@@ -161,7 +166,7 @@ class OwnCollectionTest {
         list.add(200);
         list.add(300);
 
-        OwnCollection<Integer> testCollection = new OwnCollection<>(list);
+        OwnArrayListCollection<Integer> testCollection = new OwnArrayListCollection<>(list);
 
         assertEquals(3, testCollection.size());
         assertTrue(testCollection.contains(100));

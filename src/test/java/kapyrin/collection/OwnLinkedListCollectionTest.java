@@ -53,6 +53,7 @@ class OwnLinkedListCollectionTest {
 
         assertEquals(1, collection.get(0));
         assertEquals(2, collection.get(1));
+
         assertThrows(IndexOutOfBoundsException.class, () -> {
             collection.get(2);
         });

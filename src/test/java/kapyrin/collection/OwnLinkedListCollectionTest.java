@@ -32,6 +32,8 @@ class OwnLinkedListCollectionTest {
     void testContains() {
         assertFalse(collection.contains(45));
 
+        collection.add(25);
+        collection.add(35);
         collection.add(45);
         collection.add(415);
 

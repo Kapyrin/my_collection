@@ -20,6 +20,7 @@ public class OwnLinkedListCollection<T> implements CustomCollection<T> {
     @Override
     public void add(T element) {
         Node<T> newNode = new Node<>(element);
+
         if (head == null) {
             head = tail = newNode;
         } else {
@@ -33,6 +34,7 @@ public class OwnLinkedListCollection<T> implements CustomCollection<T> {
     @Override
     public boolean contains(T element) {
         Node<T> current = head;
+
         while (current != null) {
             if (element == null ? current.data == null : current.data.equals(element)) {
                 return true;

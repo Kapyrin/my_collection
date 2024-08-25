@@ -32,8 +32,11 @@ class OwnArrayListCollectionTest {
     void testContains() {
         assertFalse(collection.contains(45));
 
+        collection.add(25);
+        collection.add(35);
         collection.add(45);
         collection.add(415);
+
 
         assertTrue(collection.contains(45));
         assertFalse(collection.contains(60));

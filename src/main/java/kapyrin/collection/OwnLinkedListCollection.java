@@ -148,7 +148,7 @@ public class OwnLinkedListCollection<T> implements CustomCollection<T> {
         while (current != null) {
             sb.append(current.data);
             if (current.next != null) {
-                sb.append(" -> ");
+                sb.append(", ");
             }
             current = current.next;
         }

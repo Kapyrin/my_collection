@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.stream.IntStream;
 
-public class OwnCollection<T> {
+public class OwnCollection<T> implements CustomCollection<T> {
     private T[] partsOfCollection;
     private int size;
     private static final int INITIAL_CAPACITY = 16;
@@ -26,31 +26,36 @@ public class OwnCollection<T> {
         addAll(collection);
     }
 
+    @Override
     public void add(T element) {
         increaseCapacity();
         partsOfCollection[size++] = element;
     }
 
+    @Override
     public boolean contains(T element) {
         return IntStream.range(0, size)
                 .anyMatch(i -> element.equals(partsOfCollection[i]));
     }
 
-
+    @Override
     public T get(int index) {
         checkValidIndex(index);
         return partsOfCollection[index];
     }
 
+    @Override
     public int size() {
         return size;
     }
 
+    @Override
     public void clear() {
         this.partsOfCollection = (T[]) new Comparable[INITIAL_CAPACITY];
         this.size = 0;
     }
 
+    @Override
     public boolean removeByIndex(int index) {
         if (checkValidIndex(index)) {
             int movedIndex = size - index - 1;
@@ -64,6 +69,7 @@ public class OwnCollection<T> {
         return false;
     }
 
+    @Override
     public boolean removeByValue(T element) {
         int[] removeIndexes = returnIndex(element);
 
@@ -77,6 +83,7 @@ public class OwnCollection<T> {
 
     }
 
+    @Override
     public void addAll(T... elements) {
         for (T element : elements) {
             add(element);
@@ -95,22 +102,6 @@ public class OwnCollection<T> {
     }
 
 
-    public static <T extends Comparable<? super T>> void bubbleSort(OwnCollection<T> collection) {
-        boolean swapped;
-        for (int i = 0; i < collection.size() - 1; i++) {
-            swapped = false;
-            for (int j = 0; j < collection.size() - i - 1; j++) {
-                if (collection.get(j).compareTo(collection.get(j + 1)) > 0) {
-                    T temp = collection.get(j);
-                    collection.partsOfCollection[j] = collection.get(j + 1);
-                    collection.partsOfCollection[j + 1] = temp;
-                    swapped = true;
-                }
-            }
-            if (!swapped) break;
-        }
-    }
-
     private void increaseCapacity() {
         if (size >= partsOfCollection.length * 0.8) {
             int newSize = partsOfCollection.length * 2;
@@ -120,9 +111,17 @@ public class OwnCollection<T> {
 
     public void addAll(Collection<? extends T> elements) {
         increaseCapacity();
+
         for (T element : elements) {
             add(element);
         }
+    }
+
+    @Override
+    public void set(int index, T element) {
+        checkValidIndex(index);
+
+        partsOfCollection[index] = element;
     }
 
     private boolean checkValidIndex(int index) {

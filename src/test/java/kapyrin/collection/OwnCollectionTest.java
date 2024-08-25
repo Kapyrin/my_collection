@@ -89,6 +89,7 @@ class OwnCollectionTest {
         collection.add(30);
 
         assertTrue(collection.removeByIndex(1));
+
         assertFalse(collection.contains(20));
         assertEquals(2, collection.size());
         assertTrue(collection.contains(30));
@@ -102,7 +103,9 @@ class OwnCollectionTest {
         collection.add(30);
 
         assertTrue(collection.contains(30));
+
         assertTrue(collection.removeByValue(30));
+
         assertFalse(collection.contains(30));
     }
 
@@ -116,6 +119,18 @@ class OwnCollectionTest {
         assertTrue(collection.contains(15));
         assertTrue(collection.contains(20));
     }
+    @Test
+    void testSet() {
+        collection.add(10);
+        collection.add(20);
+        collection.add(30);
+
+        collection.set(0, 15);
+
+        assertEquals(15, collection.get(0));
+        assertEquals(20, collection.get(1));
+        assertEquals(30, collection.get(2));
+    }
 
 
     @Test
@@ -125,7 +140,9 @@ class OwnCollectionTest {
         collection.add(3);
         collection.add(-4);
         collection.add(5);
-        OwnCollection.bubbleSort(collection);
+
+        CustomCollection.bubbleSort(collection);
+
         assertEquals(-4, collection.get(0));
         assertEquals(-2, collection.get(1));
         assertEquals(1, collection.get(2));

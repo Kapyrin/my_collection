@@ -34,7 +34,7 @@ public class OwnLinkedListCollection<T> implements CustomCollection<T> {
     public boolean contains(T element) {
         Node<T> current = head;
         while (current != null) {
-            if (current.data.equals(element)) {
+            if (element == null ? current.data == null : current.data.equals(element)) {
                 return true;
             }
             current = current.next;
@@ -83,24 +83,14 @@ public class OwnLinkedListCollection<T> implements CustomCollection<T> {
     @Override
     public boolean removeByValue(T element) {
         Node<T> current = head;
+        int index = 0;
+
         while (current != null) {
-            if (current.data.equals(element)) {
-                if (current.prev != null) {
-                    current.prev.next = current.next;
-                } else {
-                    head = current.next;
-                }
-
-                if (current.next != null) {
-                    current.next.prev = current.prev;
-                } else {
-                    tail = current.prev;
-                }
-
-                size--;
-                return true;
+            if (element == null ? current.data == null : current.data.equals(element)) {
+                return removeByIndex(index);
             }
             current = current.next;
+            index++;
         }
         return false;
     }
@@ -111,7 +101,6 @@ public class OwnLinkedListCollection<T> implements CustomCollection<T> {
             add(element);
         }
     }
-
 
     @Override
     public void addAll(Collection<? extends T> elements) {
@@ -127,9 +116,18 @@ public class OwnLinkedListCollection<T> implements CustomCollection<T> {
     }
 
     private Node<T> getNode(int index) {
-        Node<T> current = head;
-        for (int i = 0; i < index; i++) {
-            current = current.next;
+        Node<T> current;
+
+        if (index < size / 2) {
+            current = head;
+            for (int i = 0; i < index; i++) {
+                current = current.next;
+            }
+        } else {
+            current = tail;
+            for (int i = size - 1; i > index; i--) {
+                current = current.prev;
+            }
         }
         return current;
     }

@@ -19,10 +19,8 @@ public interface CustomCollection<T> {
     boolean removeByValue(T element);
 
     void addAll(T... elements);
-
     void addAll(Collection<? extends T> elements);
     void set(int index, T element);
-
 
     static <T extends Comparable<? super T>> void bubbleSort(CustomCollection<T> collection) {
         boolean swapped;

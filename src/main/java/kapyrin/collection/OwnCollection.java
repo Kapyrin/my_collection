@@ -10,18 +10,18 @@ public class OwnCollection<T> implements CustomCollection<T> {
     private static final int INITIAL_CAPACITY = 16;
 
     public OwnCollection() {
-        this.partsOfCollection = (T[]) new Comparable[INITIAL_CAPACITY];
+        this.partsOfCollection = (T[]) new Object[INITIAL_CAPACITY];
         size = 0;
     }
 
     public OwnCollection(int size) {
-        this.partsOfCollection = (T[]) new Comparable[size];
+        this.partsOfCollection = (T[]) new Object[size];
         this.size = 0;
     }
 
 
     public OwnCollection(Collection<? extends T> collection) {
-        this.partsOfCollection = (T[]) new Comparable[collection.size()];
+        this.partsOfCollection = (T[]) new Object[collection.size()];
         this.size = 0;
         addAll(collection);
     }
@@ -35,7 +35,7 @@ public class OwnCollection<T> implements CustomCollection<T> {
     @Override
     public boolean contains(T element) {
         return IntStream.range(0, size)
-                .anyMatch(i -> element.equals(partsOfCollection[i]));
+                .anyMatch(e -> element.equals(partsOfCollection[e]));
     }
 
     @Override
@@ -51,7 +51,7 @@ public class OwnCollection<T> implements CustomCollection<T> {
 
     @Override
     public void clear() {
-        this.partsOfCollection = (T[]) new Comparable[INITIAL_CAPACITY];
+        this.partsOfCollection = (T[]) new Object[INITIAL_CAPACITY];
         this.size = 0;
     }
 

@@ -7,7 +7,7 @@ abstract class AbstractMyCollectionTest<T> {
     protected CustomCollection<T> collection;
 
     @BeforeEach
-    public abstract void setUp();
+   abstract void setUp();  // Абстрактный метод для инициализации коллекции
 
     
    abstract void testAdd();

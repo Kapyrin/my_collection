@@ -4,7 +4,7 @@ package kapyrin.collection;
 abstract class AbstractMyCollectionTest<T> {
     protected CustomCollection<T> collection;
 
-    abstract void setUp();  // Абстрактный метод для инициализации коллекции
+    abstract void setUp();
 
     abstract void testAdd();
 

@@ -8,14 +8,16 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class OwnArrayListCollectionTest {
+class OwnArrayListCollectionTest extends AbstractMyCollectionTest {
     private OwnArrayListCollection collection;
 
+    @Override
     @BeforeEach
     public void setUp() {
         collection = new OwnArrayListCollection<Integer>();
     }
 
+    @Override
     @Test
     void testAdd() {
         collection.add(1);
@@ -28,6 +30,7 @@ class OwnArrayListCollectionTest {
         assertFalse(collection.contains(4));
     }
 
+    @Override
     @Test
     void testContains() {
         assertFalse(collection.contains(45));
@@ -42,11 +45,13 @@ class OwnArrayListCollectionTest {
         assertFalse(collection.contains(60));
     }
 
+    @Override
     @Test
-    void testDefaultSizeIsSixteen() {
+    void testDefaultSizeIsZero() {
         assertEquals(0, collection.size());
     }
 
+    @Override
     @Test
     void testGet() {
         collection.add(1);
@@ -60,6 +65,7 @@ class OwnArrayListCollectionTest {
         });
     }
 
+    @Override
     @Test
     void testSize() {
         collection.add(1);
@@ -71,6 +77,7 @@ class OwnArrayListCollectionTest {
         assertEquals(5, collection.size());
     }
 
+    @Override
     @Test
     void testClear() {
         collection.add(1);
@@ -89,6 +96,7 @@ class OwnArrayListCollectionTest {
         assertFalse(collection.contains(5));
     }
 
+    @Override
     @Test
     void testRemoveByIndex() {
         collection.add(10);
@@ -116,6 +124,7 @@ class OwnArrayListCollectionTest {
         assertFalse(collection.contains(30));
     }
 
+    @Override
     @Test
     void testAddAll() {
         collection.addAll(5, 10, 15, 20);
@@ -127,6 +136,7 @@ class OwnArrayListCollectionTest {
         assertTrue(collection.contains(20));
     }
 
+    @Override
     @Test
     void testSet() {
         collection.add(10);
@@ -144,7 +154,7 @@ class OwnArrayListCollectionTest {
         });
     }
 
-
+    @Override
     @Test
     void testBubbleSort() {
         collection.add(1);
@@ -166,6 +176,7 @@ class OwnArrayListCollectionTest {
         assertNotEquals(-4, collection.get(3));
     }
 
+    @Override
     @Test
     void testConstructorWithAnotherCollectionToParameter() {
         List<Integer> list = new ArrayList<>();

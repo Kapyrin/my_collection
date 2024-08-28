@@ -7,6 +7,18 @@ public class OwnLinkedListCollection<T> implements CustomCollection<T> {
     private Node<T> tail;
     private int size;
 
+    public OwnLinkedListCollection() {
+        this.head = null;
+        this.size = 0;
+    }
+
+    public OwnLinkedListCollection(Collection<? extends T> collection) {
+        this();
+        for (T element : collection) {
+            add(element);
+        }
+    }
+
     private static class Node<T> {
         T data;
         Node<T> next;

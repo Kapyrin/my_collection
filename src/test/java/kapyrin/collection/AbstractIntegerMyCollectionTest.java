@@ -6,11 +6,17 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 import java.util.Collection;
 
-abstract class AbstractIntegerMyCollectionTest extends AbstractMyCollectionTest<Integer> {
+abstract class AbstractIntegerMyCollectionTest implements MyCollectionTest<Integer> {
+    protected CustomCollection<Integer> collection;
 
     @Override
+    public abstract void setUp();
+
+    @Override
+    public abstract CustomCollection<Integer> createCollectionFromExisting(Collection<Integer> existingCollection);
+    @Override
     @Test
-    void testAdd() {
+    public void testAdd() {
         collection.add(1);
         collection.add(2);
         collection.add(3);
@@ -23,7 +29,7 @@ abstract class AbstractIntegerMyCollectionTest extends AbstractMyCollectionTest<
 
     @Override
     @Test
-    void testContains() {
+    public void testContains() {
         assertFalse(collection.contains(45));
 
         collection.add(25);
@@ -37,7 +43,7 @@ abstract class AbstractIntegerMyCollectionTest extends AbstractMyCollectionTest<
 
     @Override
     @Test
-    void testConstructorWithAnotherCollectionToParameter() {
+    public void testConstructorWithAnotherCollectionToParameter() {
         Collection<Integer> list = new ArrayList<>();
         list.add(100);
         list.add(200);
@@ -54,13 +60,13 @@ abstract class AbstractIntegerMyCollectionTest extends AbstractMyCollectionTest<
 
     @Override
     @Test
-    void testDefaultSizeIsZero() {
+    public void testDefaultSizeIsZero() {
         assertEquals(0, collection.size());
     }
 
     @Override
     @Test
-    void testGet() {
+    public void testGet() {
         collection.add(1);
         collection.add(2);
 
@@ -74,7 +80,7 @@ abstract class AbstractIntegerMyCollectionTest extends AbstractMyCollectionTest<
 
     @Override
     @Test
-    void testSize() {
+    public void testSize() {
         collection.add(1);
         collection.add(2);
         collection.add(3);
@@ -86,7 +92,7 @@ abstract class AbstractIntegerMyCollectionTest extends AbstractMyCollectionTest<
 
     @Override
     @Test
-    void testClear() {
+    public void testClear() {
         collection.add(1);
         collection.add(2);
         collection.add(3);
@@ -105,7 +111,7 @@ abstract class AbstractIntegerMyCollectionTest extends AbstractMyCollectionTest<
 
     @Override
     @Test
-    void testRemoveByIndex() {
+    public void testRemoveByIndex() {
         collection.add(10);
         collection.add(20);
         collection.add(30);
@@ -120,7 +126,7 @@ abstract class AbstractIntegerMyCollectionTest extends AbstractMyCollectionTest<
 
     @Override
     @Test
-    void testRemoveByElement() {
+    public void testRemoveByElement() {
         collection.add(10);
         collection.add(20);
         collection.add(30);
@@ -134,7 +140,7 @@ abstract class AbstractIntegerMyCollectionTest extends AbstractMyCollectionTest<
 
     @Override
     @Test
-    void testAddAll() {
+    public void testAddAll() {
         collection.addAll(5, 10, 15, 20);
         assertEquals(4, collection.size());
 
@@ -146,7 +152,7 @@ abstract class AbstractIntegerMyCollectionTest extends AbstractMyCollectionTest<
 
     @Override
     @Test
-    void testSet() {
+    public void testSet() {
         collection.add(10);
         collection.add(20);
         collection.add(30);
@@ -164,7 +170,7 @@ abstract class AbstractIntegerMyCollectionTest extends AbstractMyCollectionTest<
 
     @Override
     @Test
-    void testBubbleSort() {
+    public void testBubbleSort() {
         collection.add(1);
         collection.add(-2);
         collection.add(3);

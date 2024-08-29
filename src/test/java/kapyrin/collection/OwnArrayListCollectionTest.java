@@ -13,7 +13,7 @@ class OwnArrayListCollectionTest extends AbstractIntegerMyCollectionTest {
     }
 
     @Override
-    protected CustomCollection<Integer> createCollectionFromExisting(Collection<Integer> existingCollection) {
+    public CustomCollection<Integer> createCollectionFromExisting(Collection<Integer> existingCollection) {
         return new OwnArrayListCollection<>(existingCollection);
     }
 }

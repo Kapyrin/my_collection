@@ -14,7 +14,7 @@ class OwnLinkedListCollectionTest extends AbstractIntegerMyCollectionTest {
     }
 
     @Override
-    protected CustomCollection<Integer> createCollectionFromExisting(Collection<Integer> existingCollection) {
+    public CustomCollection<Integer> createCollectionFromExisting(Collection<Integer> existingCollection) {
         return new OwnLinkedListCollection<>(existingCollection);
     }
 }
